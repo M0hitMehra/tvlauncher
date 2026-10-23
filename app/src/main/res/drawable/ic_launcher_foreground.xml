@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- TV icon: screen with antenna -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M78,28L30,28C26.69,28 24,30.69 24,34L24,68C24,71.31 26.69,74 30,74L52,74L52,82L44,82L44,86L64,86L64,82L56,82L56,74L78,74C81.31,74 84,71.31 84,68L84,34C84,30.69 81.31,28 78,28ZM80,68C80,69.1 79.1,70 78,70L30,70C28.9,70 28,69.1 28,68L28,34C28,32.9 28.9,32 30,32L78,32C79.1,32 80,32.9 80,34L80,68Z"/>
+    <!-- Grid dots for launcher concept -->
+    <circle android:fillColor="#29B6F6" android:cx="40" android:cy="44" android:r="4"/>
+    <circle android:fillColor="#29B6F6" android:cx="54" android:cy="44" android:r="4"/>
+    <circle android:fillColor="#29B6F6" android:cx="68" android:cy="44" android:r="4"/>
+    <circle android:fillColor="#29B6F6" android:cx="40" android:cy="58" android:r="4"/>
+    <circle android:fillColor="#29B6F6" android:cx="54" android:cy="58" android:r="4"/>
+    <circle android:fillColor="#29B6F6" android:cx="68" android:cy="58" android:r="4"/>
+</vector>
