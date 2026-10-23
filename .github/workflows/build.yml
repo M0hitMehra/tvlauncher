@@ -21,30 +21,32 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      # Download gradle-wrapper.jar (not committed to repo)
+      # The Android SDK is already installed on ubuntu-latest at $ANDROID_SDK_ROOT
+      # We just need to point local.properties at it and install the right API level.
+      - name: Write local.properties
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
+      - name: Accept Android SDK licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Install Android SDK platform & build-tools
+        run: |
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager \
+            "platforms;android-35" \
+            "build-tools;35.0.0" \
+            "platform-tools"
+
+      # Download the Gradle wrapper JAR (not committed to the repo)
       - name: Download Gradle wrapper jar
         run: |
           mkdir -p gradle/wrapper
-          curl -L -o gradle/wrapper/gradle-wrapper.jar \
+          curl -fSL -o gradle/wrapper/gradle-wrapper.jar \
             "https://raw.githubusercontent.com/gradle/gradle/v8.9.0/gradle/wrapper/gradle-wrapper.jar"
 
       - name: Make gradlew executable
         run: chmod +x gradlew
-
-      # Write local.properties with CI SDK path
-      - name: Set up local.properties
-        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses || true
-
-      - name: Install required SDK components
-        run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
